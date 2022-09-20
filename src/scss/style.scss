@@ -1,0 +1,24 @@
+@import "_config";
+@import "_players";
+@import "_board";
+@import "_resetBtns";
+@import "_footer";
+@import "_winLine";
+
+html {
+  font-family: "Architects Daughter", cursive;
+}
+
+body {
+  width: 100%;
+  background-color: $primary-bcg;
+}
+
+main {
+  width: 100%;
+  height: 100vh;
+  background-color: $primary-bcg;
+  display: grid;
+  grid-template-columns: 1fr 37.5rem 1fr;
+  grid-template-rows: 1fr 37.5rem 1fr;
+}

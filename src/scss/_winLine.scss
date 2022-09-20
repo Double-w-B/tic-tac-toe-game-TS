@@ -1,0 +1,70 @@
+/* WIN line */
+
+.winLine {
+  background-color: #e63946;
+  width: 100%;
+  height: 0.7rem;
+  position: absolute;
+  border-radius: 5px;
+  visibility: hidden;
+  transition: none;
+}
+
+/* Horizontal Win */
+
+.horizontalTopWin {
+  visibility: visible;
+  top: 15.5%;
+  left: 0;
+}
+
+.horizontalMidWin {
+  visibility: visible;
+  top: 49.5%;
+  left: 0;
+}
+
+.horizontalBotWin {
+  visibility: visible;
+  bottom: 15.5%;
+  left: 0;
+}
+
+/* Vertical Win */
+
+.verticalLeftWin {
+  visibility: visible;
+  top: 49.2%;
+  left: -34%;
+  transform: rotate(90deg);
+}
+
+.verticalMidWin {
+  visibility: visible;
+  top: 49.2%;
+  left: 0;
+  transform: rotate(90deg);
+}
+
+.verticalRightWin {
+  visibility: visible;
+  top: 49.2%;
+  right: -33.5%;
+  transform: rotate(90deg);
+}
+
+/* Angle Win */
+
+.rightAngleWin {
+  visibility: visible;
+  top: 49%;
+  left: 0;
+  transform: rotate(135deg);
+}
+
+.leftAngleWin {
+  visibility: visible;
+  top: 49%;
+  left: 0;
+  transform: rotate(-135deg);
+}

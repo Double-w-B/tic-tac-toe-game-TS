@@ -1,0 +1,36 @@
+$primary-bcg: #f1faee;
+$secondary-bcg: #a8dadc;
+$primary-color: #1d3557;
+$secondary-color: #457b9dcc;
+$error-color: #e63946;
+$yellow-color: #ffb703;
+$green-color: #2b9348;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes blink {
+  50% {
+    background-color: var(--error-color);
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

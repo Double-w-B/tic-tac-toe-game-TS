@@ -1,0 +1,31 @@
+/* Board */
+
+.board {
+  width: 37.5rem;
+  height: 37.5rem;
+  pointer-events: none;
+  display: grid;
+  grid-gap: 5px;
+  grid-column: 2/2;
+  grid-row: 2/3;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  border-radius: 5px;
+  position: relative;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  background-color: $primary-color;
+  -webkit-animation: fade-in 1.5s;
+  -moz-animation: fade-in 1.5s;
+  -o-animation: fade-in 1.5s;
+  animation: fade-in 1.5s;
+
+  .box {
+    pointer-events: all;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    @include flex-center;
+    font-size: 6rem;
+    background-color: $secondary-bcg;
+  }
+}
