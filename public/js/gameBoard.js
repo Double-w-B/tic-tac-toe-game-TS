@@ -1,18 +1,11 @@
-"use strict";
-class App {
-    constructor() {
-        this.appContainer = document.getElementById("app");
-        this.appContainer.appendChild(this.createResultsDashboard());
-        this.appContainer.appendChild(this.createPlayingBoard());
-        this.appContainer.appendChild(this.createResetBtns());
-        this.appContainer.appendChild(this.createFooter());
-    }
+export class GameBoard {
+    constructor() { }
     createResultsDashboard() {
         const container = document.createElement("div");
         container.className = "players no-select";
-        container.appendChild(new UserIcon("playerName").createUserIcon());
-        container.appendChild(new UserIcon("computer").createUserIcon());
-        container.appendChild(new UserIcon().createInDrawSection());
+        container.appendChild(new UserSection("playerName").createUserIcon());
+        container.appendChild(new UserSection("computer").createUserIcon());
+        container.appendChild(new UserSection().createInDrawSection());
         return container;
     }
     createPlayingBoard() {
@@ -62,7 +55,7 @@ class App {
         return footer;
     }
 }
-class UserIcon {
+export class UserSection {
     constructor(className = "") {
         this.className = className;
     }
@@ -92,5 +85,4 @@ class UserIcon {
         return container;
     }
 }
-new App();
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=gameBoard.js.map

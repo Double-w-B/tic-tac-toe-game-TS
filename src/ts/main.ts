@@ -1,119 +1,15 @@
+import { GameBoard } from "./gameBoard.js";
+import { Modal } from "./modal.js";
+
 class App {
   appContainer: HTMLElement;
   constructor() {
     this.appContainer = document.getElementById("app") as HTMLElement;
-    this.appContainer.appendChild(this.createResultsDashboard());
-    this.appContainer.appendChild(this.createPlayingBoard());
-    this.appContainer.appendChild(this.createResetBtns());
-    this.appContainer.appendChild(this.createFooter());
-  }
-
-  createResultsDashboard() {
-    const container = document.createElement("div");
-    container.className = "players no-select";
-    container.appendChild(new UserIcon("playerName").createUserIcon());
-    container.appendChild(new UserIcon("computer").createUserIcon());
-    container.appendChild(new UserIcon().createInDrawSection());
-    return container;
-  }
-
-  createPlayingBoard() {
-    const board = document.createElement("div");
-    board.className = "board no-select";
-
-    for (let i = 0; i < 9; i++) {
-      const box = document.createElement("div");
-      box.className = `box t${i}`;
-      board.appendChild(box);
-    }
-    const winLine = document.createElement("div");
-    winLine.className = "winLine";
-
-    board.appendChild(winLine);
-    return board;
-  }
-
-  createResetBtns() {
-    const container = document.createElement("div");
-    container.className = "reset";
-
-    const wrapper = document.createElement("div");
-    wrapper.className = "reset-div";
-
-    const sideX = document.createElement("div");
-    sideX.className = "reset-btn no-select";
-    sideX.innerText = "X";
-    const sideO = document.createElement("div");
-    sideO.className = "reset-btn no-select";
-    sideO.innerText = "O";
-    const icon = document.createElement("i");
-    icon.className = "fas fa-exchange-alt";
-
-    wrapper.appendChild(sideX);
-    wrapper.appendChild(icon);
-    wrapper.appendChild(sideO);
-    container.appendChild(wrapper);
-    return container;
-  }
-
-  createFooter() {
-    const footer = document.createElement("footer");
-    const txtParagraph = document.createElement("p");
-
-    const link = document.createElement("a");
-    link.href = "https://github.com/Double-w-B";
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    link.innerText = "Władysław Balandin";
-
-    const textNode = document.createTextNode("made by ");
-
-    txtParagraph.appendChild(textNode);
-    txtParagraph.appendChild(link);
-
-    footer.appendChild(txtParagraph);
-    return footer;
-  }
-}
-
-class UserIcon {
-  className: string;
-  constructor(className: string = "") {
-    this.className = className;
-  }
-
-  createUserIcon() {
-    const container = document.createElement("div");
-    container.className = `${this.className}`;
-
-    const imgContainer = document.createElement("div");
-    imgContainer.className = "img-box";
-
-    const icon = document.createElement("i");
-    icon.className = "fas fa-user";
-    imgContainer.appendChild(icon);
-
-    const nameContainer = document.createElement("div");
-    nameContainer.className = "text";
-
-    const nameParagraph = document.createElement("p");
-    nameParagraph.innerText = "Name[]:";
-    nameContainer.appendChild(nameParagraph);
-
-    container.appendChild(imgContainer);
-    container.appendChild(nameContainer);
-    return container;
-  }
-
-  createInDrawSection() {
-    const container = document.createElement("div");
-    container.className = "inDraw";
-
-    const txtParagraph = document.createElement("p");
-    txtParagraph.innerText = `Played to \n a draw:`;
-
-    container.appendChild(txtParagraph);
-    return container;
+    this.appContainer.appendChild(new GameBoard().createResultsDashboard());
+    this.appContainer.appendChild(new GameBoard().createPlayingBoard());
+    this.appContainer.appendChild(new GameBoard().createResetBtns());
+    this.appContainer.appendChild(new GameBoard().createFooter());
+    this.appContainer.appendChild(new Modal().createModal());
   }
 }
 
