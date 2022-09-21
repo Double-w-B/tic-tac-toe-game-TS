@@ -19,17 +19,58 @@
   user-select: none;
 }
 
-@keyframes blink {
-  50% {
-    background-color: var(--error-color);
-  }
+.blink-animation {
+  animation: shake-animation 4.72s ease infinite;
 }
+
+.red-color,
+.yellow-color,
+.green-color {
+  color: #e63946;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.yellow-color {
+  color: #ffb703;
+}
+
+.green-color {
+  color: #2b9348;
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
+  }
+}
+@keyframes shake-animation {
+  0% {
+    transform: translate(0, 0);
+  }
+  1.78571% {
+    transform: translate(5px, 0);
+  }
+  3.57143% {
+    transform: translate(0, 0);
+  }
+  5.35714% {
+    transform: translate(5px, 0);
+  }
+  7.14286% {
+    transform: translate(0, 0);
+  }
+  8.92857% {
+    transform: translate(5px, 0);
+  }
+  10.71429% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, 0);
   }
 }
 /* Players */
@@ -136,6 +177,9 @@
   font-size: 6rem;
   background-color: #a8dadc;
 }
+.board .box.mouse-block {
+  pointer-events: none;
+}
 
 .reset {
   width: 100%;
@@ -175,6 +219,12 @@
   font-weight: 600;
   box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5), inset 8px 8px 16px rgba(0, 0, 0, 0.1);
   opacity: 0.9;
+}
+.reset .reset-div .reset-btn.active-side {
+  box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
 }
 .reset .reset-div .reset-btn:hover {
   box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8), 6px 6px 10px rgba(0, 0, 0, 0.2);
@@ -358,6 +408,10 @@ footer a {
   transition: all 0.2s linear;
   cursor: pointer;
 }
+.modal-container button.done {
+  background-color: #a8dadc;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
 .modal-container button:active {
   transform: translateY(1px);
 }
@@ -376,7 +430,8 @@ footer a {
   justify-content: space-between;
   margin: 0 auto;
 }
-.modal-container .container-select-side .select-side div {
+.modal-container .container-select-side .select-side .sideX,
+.modal-container .container-select-side .select-side .sideO {
   width: 48%;
   height: 100%;
   display: flex;
@@ -388,7 +443,20 @@ footer a {
   border-radius: 5px;
   border: 3px solid #a8dadc;
 }
-.modal-container .container-select-side .select-side div:hover {
+.modal-container .container-select-side .select-side .sideX.chosenSide,
+.modal-container .container-select-side .select-side .sideO.chosenSide {
+  width: 100%;
+  cursor: default;
+  background-color: #a8dadc;
+}
+.modal-container .container-select-side .select-side .sideX.vsSide,
+.modal-container .container-select-side .select-side .sideO.vsSide {
+  visibility: hidden;
+  width: 0;
+  opacity: 0;
+}
+.modal-container .container-select-side .select-side .sideX:hover,
+.modal-container .container-select-side .select-side .sideO:hover {
   cursor: pointer;
   background-color: #a8dadc;
 }
@@ -404,9 +472,12 @@ footer a {
   right: 0;
   top: 20%;
 }
+.modal-container .container-select-side .back-btn .fas.btn-visibility {
+  visibility: visible;
+}
 .modal-container .container-select-side .back-btn:hover {
   cursor: pointer;
-  color: var(--error-color);
+  color: #e63946;
   text-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 }
 

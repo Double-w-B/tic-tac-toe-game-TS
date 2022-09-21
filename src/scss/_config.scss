@@ -27,16 +27,30 @@ $green-color: #2b9348;
   user-select: none;
 }
 
+.blink-animation {
+  animation: shake-animation 4.72s ease infinite;
+}
+
+.red-color,
+.yellow-color,
+.green-color {
+  color: $error-color;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.yellow-color {
+  color: $yellow-color;
+}
+
+.green-color {
+  color: $green-color;
+}
+
 @mixin flex-center {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-@keyframes blink {
-  50% {
-    background-color: var(--error-color);
-  }
 }
 
 @keyframes fade-in {
@@ -46,5 +60,32 @@ $green-color: #2b9348;
 
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes shake-animation {
+  0% {
+    transform: translate(0, 0);
+  }
+  1.78571% {
+    transform: translate(5px, 0);
+  }
+  3.57143% {
+    transform: translate(0, 0);
+  }
+  5.35714% {
+    transform: translate(5px, 0);
+  }
+  7.14286% {
+    transform: translate(0, 0);
+  }
+  8.92857% {
+    transform: translate(5px, 0);
+  }
+  10.71429% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(0, 0);
   }
 }

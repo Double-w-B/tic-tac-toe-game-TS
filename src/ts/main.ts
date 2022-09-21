@@ -1,5 +1,6 @@
 import { GameBoard } from "./gameBoard.js";
 import { Modal } from "./modal.js";
+import { ModalLogic } from "./modal-logic.js";
 
 class App {
   appContainer: HTMLElement;
@@ -10,6 +11,7 @@ class App {
     this.appContainer.appendChild(new GameBoard().createResetBtns());
     this.appContainer.appendChild(new GameBoard().createFooter());
     this.appContainer.appendChild(new Modal().createModal());
+    new ModalLogic();
   }
 }
 

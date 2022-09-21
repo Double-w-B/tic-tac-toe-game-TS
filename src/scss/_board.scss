@@ -27,5 +27,9 @@
     @include flex-center;
     font-size: 6rem;
     background-color: $secondary-bcg;
+
+    &.mouse-block {
+      pointer-events: none;
+    }
   }
 }

@@ -90,7 +90,7 @@ export class UserSection {
     nameContainer.className = "text";
 
     const nameParagraph = document.createElement("p");
-    nameParagraph.innerText = "Name[]:";
+    nameParagraph.textContent = "Name[]:";
     nameContainer.appendChild(nameParagraph);
 
     container.appendChild(imgContainer);
@@ -101,7 +101,6 @@ export class UserSection {
   createInDrawSection() {
     const container = document.createElement("div");
     container.className = "inDraw";
-
     const txtParagraph = document.createElement("p");
     txtParagraph.innerText = `Played to \n a draw:`;
 

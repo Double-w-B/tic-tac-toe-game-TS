@@ -17,7 +17,7 @@
     justify-content: space-around;
     align-items: center;
 
-    & .fas {
+    .fas {
       font-size: 2rem;
       color: $primary-color;
     }
@@ -36,6 +36,14 @@
       box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
         inset 8px 8px 16px rgba(0, 0, 0, 0.1);
       opacity: 0.9;
+
+      &.active-side {
+        box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+          6px 6px 10px rgba(0, 0, 0, 0.2);
+        pointer-events: none;
+        cursor: default;
+        opacity: 0.6;
+      }
 
       &:hover {
         box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),

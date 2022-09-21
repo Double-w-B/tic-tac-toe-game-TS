@@ -70,7 +70,7 @@ export class UserSection {
         const nameContainer = document.createElement("div");
         nameContainer.className = "text";
         const nameParagraph = document.createElement("p");
-        nameParagraph.innerText = "Name[]:";
+        nameParagraph.textContent = "Name[]:";
         nameContainer.appendChild(nameParagraph);
         container.appendChild(imgContainer);
         container.appendChild(nameContainer);
