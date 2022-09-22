@@ -42,9 +42,7 @@ export class GameBoard {
     const icon = document.createElement("i");
     icon.className = "fas fa-exchange-alt";
 
-    wrapper.appendChild(sideX);
-    wrapper.appendChild(icon);
-    wrapper.appendChild(sideO);
+    wrapper.append(sideX, icon, sideO);
     container.appendChild(wrapper);
     return container;
   }
@@ -61,8 +59,7 @@ export class GameBoard {
 
     const textNode = document.createTextNode("made by ");
 
-    txtParagraph.appendChild(textNode);
-    txtParagraph.appendChild(link);
+    txtParagraph.append(textNode, link);
 
     footer.appendChild(txtParagraph);
     return footer;
@@ -93,8 +90,7 @@ export class UserSection {
     nameParagraph.textContent = "Name[]:";
     nameContainer.appendChild(nameParagraph);
 
-    container.appendChild(imgContainer);
-    container.appendChild(nameContainer);
+    container.append(imgContainer, nameContainer);
     return container;
   }
 

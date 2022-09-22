@@ -12,9 +12,7 @@ export class ModalLogic {
   playerSide: HTMLSpanElement;
   computerSide: HTMLSpanElement;
   inDraw: HTMLParagraphElement;
-  playersWin: number;
-  computersWin: number;
-  gameInDraw: number;
+  resetBtn: NodeListOf<HTMLDivElement>;
 
   constructor() {
     this.modalOverlay =
@@ -34,13 +32,16 @@ export class ModalLogic {
     this.computerName =
       document.querySelector<HTMLParagraphElement>(".computer .text p")!;
 
-    this.playerSide = document.querySelector(".playerName p .side-font")!;
-    this.computerSide = document.querySelector(".computer p .side-font")!;
-    this.inDraw = document.querySelector(".inDraw p")!;
-
-    this.playersWin = 0;
-    this.computersWin = 0;
-    this.gameInDraw = 0;
+    this.playerSide = document.querySelector<HTMLSpanElement>(
+      ".playerName p .side-font"
+    )!;
+    this.computerSide = document.querySelector<HTMLSpanElement>(
+      ".computer p .side-font"
+    )!;
+    this.inDraw = document.querySelector<HTMLParagraphElement>(".inDraw p")!;
+    this.resetBtn = document.querySelectorAll(
+      ".reset-btn"
+    ) as NodeListOf<HTMLDivElement>;
 
     this.chooseSide();
     this.btnStartGame();
@@ -50,8 +51,8 @@ export class ModalLogic {
   chooseSide() {
     const handleClick = (e: MouseEvent) => {
       if (e.target === this.sideX) {
-        this.sideO!.classList.add("vsSide");
         this.sideX!.classList.add("chosenSide");
+        this.sideO!.classList.add("vsSide");
         this.backBtn!.classList.add("btn-visibility");
       }
 
@@ -106,23 +107,24 @@ export class ModalLogic {
       } else {
         this.modalOverlay.classList.add("close-modal");
 
+        this.resetBtn.forEach((btn) => btn.classList.remove("active-side"));
+
         let player_side;
         let computer_side;
-        const resetBtn = document.querySelectorAll(".reset-btn");
 
         if (this.sideX.classList.contains("chosenSide")) {
           player_side = "X";
           computer_side = "O";
-          resetBtn[0].classList.add("active-side");
+          this.resetBtn[0].classList.add("active-side");
         } else {
           player_side = "O";
           computer_side = "X";
-          resetBtn[1].classList.add("active-side");
+          this.resetBtn[1].classList.add("active-side");
         }
 
-        this.playerName!.innerHTML = `${this.input.value} <br/> [<span class="side-font">${player_side}</span>]: <span class="yellow-color">${this.playersWin}<span>`;
-        this.computerName!.innerHTML = `Boris <br/> [<span class="side-font">${computer_side}</span>]: <span class="yellow-color">${this.computersWin}<span>`;
-        this.inDraw!.innerHTML = `<p>Played to <br/> a draw: <span class="red-color">${this.gameInDraw}<span></p>`;
+        this.playerName!.innerHTML = `${this.input.value} <br/> [<span class="side-font">${player_side}</span>]: <span class="yellow-color">0<span>`;
+        this.computerName!.innerHTML = `Boris <br/> [<span class="side-font">${computer_side}</span>]: <span class="yellow-color">0<span>`;
+        this.inDraw!.innerHTML = `<p>Played to <br/> a draw: <span class="red-color">0<span></p>`;
       }
     };
     this.btnStart.addEventListener("click", handleBnStartClick);

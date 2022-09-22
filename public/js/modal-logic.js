@@ -17,17 +17,15 @@ export class ModalLogic {
         this.playerSide = document.querySelector(".playerName p .side-font");
         this.computerSide = document.querySelector(".computer p .side-font");
         this.inDraw = document.querySelector(".inDraw p");
-        this.playersWin = 0;
-        this.computersWin = 0;
-        this.gameInDraw = 0;
+        this.resetBtn = document.querySelectorAll(".reset-btn");
         this.chooseSide();
         this.btnStartGame();
     }
     chooseSide() {
         const handleClick = (e) => {
             if (e.target === this.sideX) {
-                this.sideO.classList.add("vsSide");
                 this.sideX.classList.add("chosenSide");
+                this.sideO.classList.add("vsSide");
                 this.backBtn.classList.add("btn-visibility");
             }
             if (e.target === this.sideO) {
@@ -75,22 +73,22 @@ export class ModalLogic {
             }
             else {
                 this.modalOverlay.classList.add("close-modal");
+                this.resetBtn.forEach((btn) => btn.classList.remove("active-side"));
                 let player_side;
                 let computer_side;
-                const resetBtn = document.querySelectorAll(".reset-btn");
                 if (this.sideX.classList.contains("chosenSide")) {
                     player_side = "X";
                     computer_side = "O";
-                    resetBtn[0].classList.add("active-side");
+                    this.resetBtn[0].classList.add("active-side");
                 }
                 else {
                     player_side = "O";
                     computer_side = "X";
-                    resetBtn[1].classList.add("active-side");
+                    this.resetBtn[1].classList.add("active-side");
                 }
-                this.playerName.innerHTML = `${this.input.value} <br/> [<span class="side-font">${player_side}</span>]: <span class="yellow-color">${this.playersWin}<span>`;
-                this.computerName.innerHTML = `Boris <br/> [<span class="side-font">${computer_side}</span>]: <span class="yellow-color">${this.computersWin}<span>`;
-                this.inDraw.innerHTML = `<p>Played to <br/> a draw: <span class="red-color">${this.gameInDraw}<span></p>`;
+                this.playerName.innerHTML = `${this.input.value} <br/> [<span class="side-font">${player_side}</span>]: <span class="yellow-color">0<span>`;
+                this.computerName.innerHTML = `Boris <br/> [<span class="side-font">${computer_side}</span>]: <span class="yellow-color">0<span>`;
+                this.inDraw.innerHTML = `<p>Played to <br/> a draw: <span class="red-color">0<span></p>`;
             }
         };
         this.btnStart.addEventListener("click", handleBnStartClick);
