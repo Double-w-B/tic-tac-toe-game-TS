@@ -23,8 +23,7 @@ export class Modal {
     nameInput.type = "text";
     nameInput.className = "name";
 
-    nameInputContainer.appendChild(h2);
-    nameInputContainer.appendChild(nameInput);
+    nameInputContainer.append(h2, nameInput);
 
     const selectSideContainer = document.createElement("div");
     selectSideContainer.className = "container-select-side no-select";
@@ -39,8 +38,7 @@ export class Modal {
     sideO.className = "sideO";
     sideO.textContent = "O";
 
-    selectSide.appendChild(sideX);
-    selectSide.appendChild(sideO);
+    selectSide.append(sideX, sideO);
 
     const backBtn = document.createElement("div");
     backBtn.className = "back-btn";
@@ -48,17 +46,24 @@ export class Modal {
     icon.className = "fas fa-undo-alt";
     backBtn.appendChild(icon);
 
-    selectSideContainer.appendChild(selectSide);
-    selectSideContainer.appendChild(backBtn);
+    selectSideContainer.append(selectSide, backBtn);
 
-    const btn = document.createElement("button");
-    btn.className = "btn-start no-select";
-    btn.textContent = "Let's play";
+    const btnContainer = document.createElement("div");
+    btnContainer.className = "btns-container no-select";
+    const btnStart = document.createElement("button");
+    btnStart.className = "btn-start";
+    btnStart.textContent = "Let's play";
+    const btnCancel = document.createElement("button");
+    btnCancel.className = "btn-cancel hide";
+    btnCancel.textContent = "Cancel";
 
-    modalContainer.appendChild(h1);
-    modalContainer.appendChild(nameInputContainer);
-    modalContainer.appendChild(selectSideContainer);
-    modalContainer.appendChild(btn);
+    btnContainer.append(btnStart, btnCancel);
+    modalContainer.append(
+      h1,
+      nameInputContainer,
+      selectSideContainer,
+      btnContainer
+    );
 
     modalOverlay.appendChild(modalContainer);
 
