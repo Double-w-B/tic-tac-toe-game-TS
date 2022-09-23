@@ -1,50 +1,55 @@
+import { getComputerData } from "./getComputerData.js";
+import { ComputerObj } from "./getComputerData.js";
+
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
+
 export class ModalLogic {
   modalOverlay: HTMLDivElement;
   modalContainer: HTMLDivElement;
-  selectSideContainer: HTMLDivElement;
   sideO: HTMLDivElement;
   sideX: HTMLDivElement;
   backBtn: HTMLElement;
   input: HTMLInputElement;
-  btnStart: HTMLDivElement;
+  btnStart: HTMLButtonElement;
+  btnCancel: HTMLButtonElement;
   playerName: HTMLParagraphElement;
   computerName: HTMLParagraphElement;
+  computerImgContainer: HTMLDivElement;
+  computerData: ComputerObj;
   playerSide: HTMLSpanElement;
   computerSide: HTMLSpanElement;
   inDraw: HTMLParagraphElement;
-  resetBtn: NodeListOf<HTMLDivElement>;
+  resetBtns: NodeListOf<HTMLDivElement>;
 
   constructor() {
-    this.modalOverlay =
-      document.querySelector<HTMLDivElement>(".modal-overlay")!;
-    this.modalContainer =
-      document.querySelector<HTMLDivElement>(".modal-container")!;
-    this.selectSideContainer = document.querySelector("container-select-side")!;
-    this.sideO = document.querySelector<HTMLDivElement>(".sideO")!;
-    this.sideX = document.querySelector<HTMLDivElement>(".sideX")!;
-    this.backBtn = document.querySelector<HTMLElement>(".back-btn .fas")!;
-    this.input = this.modalContainer.querySelector<HTMLInputElement>(".name")!;
-    this.btnStart =
-      this.modalContainer.querySelector<HTMLDivElement>(".btn-start")!;
-    this.playerName = document.querySelector<HTMLParagraphElement>(
-      ".playerName .text p"
-    )!;
-    this.computerName =
-      document.querySelector<HTMLParagraphElement>(".computer .text p")!;
+    this.modalOverlay = $(".modal-overlay") as HTMLDivElement;
+    this.modalContainer = $(".modal-container") as HTMLDivElement;
+    this.sideO = $(".sideO") as HTMLDivElement;
+    this.sideX = $(".sideX") as HTMLDivElement;
+    this.backBtn = $(".back-btn .fas") as HTMLElement;
+    this.input = $(".name") as HTMLInputElement;
+    this.btnStart = $(".btn-start") as HTMLButtonElement;
+    this.btnCancel = $(".btn-cancel") as HTMLButtonElement;
+    this.playerName = $(".playerName .text p") as HTMLParagraphElement;
+    this.computerName = $(".computer .text p") as HTMLParagraphElement;
+    this.computerImgContainer = $(".computer .img-box") as HTMLImageElement;
+    this.computerData = { name: "", img: "" };
 
-    this.playerSide = document.querySelector<HTMLSpanElement>(
-      ".playerName p .side-font"
-    )!;
-    this.computerSide = document.querySelector<HTMLSpanElement>(
-      ".computer p .side-font"
-    )!;
-    this.inDraw = document.querySelector<HTMLParagraphElement>(".inDraw p")!;
-    this.resetBtn = document.querySelectorAll(
-      ".reset-btn"
-    ) as NodeListOf<HTMLDivElement>;
+    this.playerSide = $(".playerName p .side-font") as HTMLSpanElement;
+    this.computerSide = $(".computer p .side-font") as HTMLSpanElement;
+    this.inDraw = $(".inDraw p") as HTMLParagraphElement;
+    this.resetBtns = $$(".reset-btn") as NodeListOf<HTMLDivElement>;
 
+    this.getComputerDate();
     this.chooseSide();
     this.btnStartGame();
+  }
+
+  getComputerDate() {
+    new getComputerData().fetchData().then((compObj) => {
+      return (this.computerData = compObj);
+    });
   }
 
   /* Choose Side */
@@ -107,7 +112,7 @@ export class ModalLogic {
       } else {
         this.modalOverlay.classList.add("close-modal");
 
-        this.resetBtn.forEach((btn) => btn.classList.remove("active-side"));
+        this.resetBtns.forEach((btn) => btn.classList.remove("active-side"));
 
         let player_side;
         let computer_side;
@@ -115,16 +120,28 @@ export class ModalLogic {
         if (this.sideX.classList.contains("chosenSide")) {
           player_side = "X";
           computer_side = "O";
-          this.resetBtn[0].classList.add("active-side");
+          this.resetBtns[0].classList.add("active-side");
         } else {
           player_side = "O";
           computer_side = "X";
-          this.resetBtn[1].classList.add("active-side");
+          this.resetBtns[1].classList.add("active-side");
         }
 
+        new getComputerData().fetchData().then((compObj) => {
+          return (this.computerData = compObj);
+        });
+
         this.playerName!.innerHTML = `${this.input.value} <br/> [<span class="side-font">${player_side}</span>]: <span class="yellow-color">0<span>`;
-        this.computerName!.innerHTML = `Boris <br/> [<span class="side-font">${computer_side}</span>]: <span class="yellow-color">0<span>`;
+
+        this.computerName!.innerHTML = `${this.computerData.name} <br/> [<span class="side-font">${computer_side}</span>]: <span class="yellow-color">0<span>`;
         this.inDraw!.innerHTML = `<p>Played to <br/> a draw: <span class="red-color">0<span></p>`;
+
+        const img = document.createElement("img");
+        img.src = this.computerData.img;
+        this.computerImgContainer.removeChild(
+          this.computerImgContainer.children[0]
+        );
+        this.computerImgContainer.append(img);
       }
     };
     this.btnStart.addEventListener("click", handleBnStartClick);
