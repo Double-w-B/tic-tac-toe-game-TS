@@ -1,36 +1,29 @@
+import { ModalLogic } from "./modal-logic.js";
 export class GameLogic {
     constructor() {
-        this.resetBtns = document.querySelectorAll(".reset-btn");
-        this.modalOverlay =
-            document.querySelector(".modal-overlay");
-        this.btnStart = document.querySelector(".btn-start");
-        this.btnCancel = document.querySelector(".btn-cancel");
-        this.playerName = document.querySelector(".playerName .text p");
-        this.modalInput = document.querySelector(".name");
-        this.sideO = document.querySelector(".sideO");
-        this.sideX = document.querySelector(".sideX");
         this.changeSide();
     }
     changeSide() {
+        const modal = new ModalLogic();
         const openModal = () => {
-            this.modalOverlay.classList.remove("close-modal");
-            this.btnStart.textContent = "Change";
-            this.btnCancel.classList.remove("hide");
-            this.modalInput.value = this.playerName.firstChild.textContent.trim();
-            if (this.playerName.children[1].textContent === "X") {
-                this.sideX.className = "sideX chosenSide";
-                this.sideO.className = "sideO vsSide";
+            modal.modalOverlay.classList.remove("close-modal");
+            modal.btnStart.textContent = "Change";
+            modal.btnCancel.classList.remove("hide");
+            modal.input.value = modal.playerName.firstChild.textContent.trim();
+            if (modal.playerName.children[1].textContent === "X") {
+                modal.sideX.className = "sideX chosenSide";
+                modal.sideO.className = "sideO vsSide";
             }
             else {
-                this.sideX.className = "sideX vsSide";
-                this.sideO.className = "sideO chosenSide";
+                modal.sideX.className = "sideX vsSide";
+                modal.sideO.className = "sideO chosenSide";
             }
         };
         const closeModal = () => {
-            this.modalOverlay.classList.add("close-modal");
+            modal.modalOverlay.classList.add("close-modal");
         };
-        this.btnCancel.addEventListener("click", closeModal);
-        this.resetBtns.forEach((btn) => {
+        modal.btnCancel.addEventListener("click", closeModal);
+        modal.resetBtns.forEach((btn) => {
             btn.addEventListener("click", openModal);
         });
     }
