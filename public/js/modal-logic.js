@@ -11,13 +11,14 @@ export class ModalLogic {
         this.input = $(".name");
         this.btnStart = $(".btn-start");
         this.btnCancel = $(".btn-cancel");
-        this.playerName = $(".playerName .text p");
-        this.computerName = $(".computer .text p");
+        this.playerNameParagraph = $(".playerName .text p");
+        this.computerNameParagraph = $(".computer .text p");
+        this.inDrawParagraph = $(".inDraw p");
+        this.playerName = "";
         this.computerImgContainer = $(".computer .img-box");
         this.computerData = { name: "", img: "" };
-        this.playerSide = $(".playerName p .side-font");
-        this.computerSide = $(".computer p .side-font");
-        this.inDraw = $(".inDraw p");
+        this.playerSide = "";
+        this.computerSide = "";
         this.resetBtns = $$(".reset-btn");
         this.getComputerDate();
         this.chooseSide();
@@ -54,11 +55,30 @@ export class ModalLogic {
     }
     btnStartGame() {
         const checkSteps = () => {
-            this.input.value &&
-                (this.sideX.classList.contains("chosenSide") ||
-                    this.sideX.classList.contains("vsSide"))
-                ? this.btnStart.classList.add("done")
-                : this.btnStart.classList.remove("done");
+            if (this.playerName.trim().length > 0) {
+                if (this.input.value.trim() !== this.playerName.trim() ||
+                    (this.sideX.classList.contains("chosenSide") &&
+                        this.playerSide != "X") ||
+                    (this.sideO.classList.contains("chosenSide") &&
+                        this.playerSide != "O")) {
+                    this.btnStart.classList.add("done");
+                    this.btnStart.classList.remove("block");
+                }
+                else {
+                    this.btnStart.classList.remove("done");
+                    this.btnStart.classList.add("block");
+                }
+            }
+            else {
+                if (this.input.value &&
+                    (this.sideX.classList.contains("chosenSide") ||
+                        this.sideX.classList.contains("vsSide"))) {
+                    this.btnStart.classList.add("done");
+                }
+                else {
+                    this.btnStart.classList.remove("done");
+                }
+            }
         };
         this.modalContainer.addEventListener("click", checkSteps);
         this.input.addEventListener("input", checkSteps);
@@ -81,24 +101,53 @@ export class ModalLogic {
             else {
                 this.modalOverlay.classList.add("close-modal");
                 this.resetBtns.forEach((btn) => btn.classList.remove("active-side"));
-                let player_side;
-                let computer_side;
+                this.playerName = this.input.value;
                 if (this.sideX.classList.contains("chosenSide")) {
-                    player_side = "X";
-                    computer_side = "O";
+                    this.playerSide = "X";
+                    this.computerSide = "O";
                     this.resetBtns[0].classList.add("active-side");
                 }
                 else {
-                    player_side = "O";
-                    computer_side = "X";
+                    this.playerSide = "O";
+                    this.computerSide = "X";
                     this.resetBtns[1].classList.add("active-side");
                 }
                 new getComputerData().fetchData().then((compObj) => {
                     return (this.computerData = compObj);
                 });
-                this.playerName.innerHTML = `${this.input.value} <br/> [<span class="side-font">${player_side}</span>]: <span class="yellow-color">0<span>`;
-                this.computerName.innerHTML = `${this.computerData.name} <br/> [<span class="side-font">${computer_side}</span>]: <span class="yellow-color">0<span>`;
-                this.inDraw.innerHTML = `<p>Played to <br/> a draw: <span class="red-color">0<span></p>`;
+                const playerLineBreak = document.createElement("br");
+                const playerOpenSqBracket = "[";
+                const playerSideSpan = document.createElement("span");
+                playerSideSpan.className = "side-font";
+                playerSideSpan.append(this.playerSide);
+                const playerCloseSqBracket = "]: ";
+                const playerWinsSpan = document.createElement("span");
+                playerWinsSpan.className = "yellow-color";
+                const playerWins = "0";
+                playerWinsSpan.append(playerWins);
+                this.playerNameParagraph.textContent = "";
+                this.playerNameParagraph.append(this.input.value, playerLineBreak, playerOpenSqBracket, playerSideSpan, playerCloseSqBracket, playerWinsSpan);
+                const computerLineBreak = document.createElement("br");
+                const computerOpenSqBracket = "[";
+                const computerSideSpan = document.createElement("span");
+                computerSideSpan.className = "side-font";
+                computerSideSpan.append(this.computerSide);
+                const computerCloseSqBracket = "]: ";
+                const computerWinsSpan = document.createElement("span");
+                computerWinsSpan.className = "yellow-color";
+                const computerWins = "0";
+                computerWinsSpan.append(computerWins);
+                this.computerNameParagraph.textContent = "";
+                this.computerNameParagraph.append(this.computerData.name, computerLineBreak, computerOpenSqBracket, computerSideSpan, computerCloseSqBracket, computerWinsSpan);
+                const inDrawTxtNodeStart = document.createTextNode("Played to ");
+                const inDrawLineBreak = document.createElement("br");
+                const inDrawTxtNodeEnd = document.createTextNode(" a draw: ");
+                const inDrawSpan = document.createElement("span");
+                inDrawSpan.className = "red-color";
+                const inDrawGames = "0";
+                inDrawSpan.append(inDrawGames);
+                this.inDrawParagraph.textContent = "";
+                this.inDrawParagraph.append(inDrawTxtNodeStart, inDrawLineBreak, inDrawTxtNodeEnd, inDrawSpan);
                 const img = document.createElement("img");
                 img.src = this.computerData.img;
                 this.computerImgContainer.removeChild(this.computerImgContainer.children[0]);
