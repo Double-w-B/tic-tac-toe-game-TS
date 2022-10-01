@@ -29,6 +29,7 @@ export class ModalLogic {
             return (this.computerData = compObj);
         });
     }
+    /* Choose Side */
     chooseSide() {
         const handleClick = (e) => {
             if (e.target === this.sideX) {
@@ -53,8 +54,10 @@ export class ModalLogic {
         this.sideO.addEventListener("click", (e) => handleClick(e));
         this.backBtn.addEventListener("click", (e) => handleClick(e));
     }
+    /* Start Game Button */
     btnStartGame() {
         const checkSteps = () => {
+            /* this.playerName, as a flag. If player started a New game - one logic, if changed name or side during the game - another logic */
             if (this.playerName.trim().length > 0) {
                 if (this.input.value.trim() !== this.playerName.trim() ||
                     (this.sideX.classList.contains("chosenSide") &&
@@ -115,6 +118,7 @@ export class ModalLogic {
                 new getComputerData().fetchData().then((compObj) => {
                     return (this.computerData = compObj);
                 });
+                /* Create Player Name & Side */
                 const playerLineBreak = document.createElement("br");
                 const playerOpenSqBracket = "[";
                 const playerSideSpan = document.createElement("span");
@@ -127,6 +131,7 @@ export class ModalLogic {
                 playerWinsSpan.append(playerWins);
                 this.playerNameParagraph.textContent = "";
                 this.playerNameParagraph.append(this.input.value, playerLineBreak, playerOpenSqBracket, playerSideSpan, playerCloseSqBracket, playerWinsSpan);
+                /* Create Computer Name & Side */
                 const computerLineBreak = document.createElement("br");
                 const computerOpenSqBracket = "[";
                 const computerSideSpan = document.createElement("span");
@@ -139,6 +144,7 @@ export class ModalLogic {
                 computerWinsSpan.append(computerWins);
                 this.computerNameParagraph.textContent = "";
                 this.computerNameParagraph.append(this.computerData.name, computerLineBreak, computerOpenSqBracket, computerSideSpan, computerCloseSqBracket, computerWinsSpan);
+                /* Create InDraw Section */
                 const inDrawTxtNodeStart = document.createTextNode("Played to ");
                 const inDrawLineBreak = document.createElement("br");
                 const inDrawTxtNodeEnd = document.createTextNode(" a draw: ");

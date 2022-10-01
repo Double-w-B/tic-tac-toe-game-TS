@@ -13,7 +13,8 @@ export class GameBoard {
         board.className = "board no-select";
         for (let i = 0; i < 9; i++) {
             const box = document.createElement("div");
-            box.className = `box t${i}`;
+            box.id = `t${i}`;
+            box.className = `box`;
             board.appendChild(box);
         }
         const winLine = document.createElement("div");
