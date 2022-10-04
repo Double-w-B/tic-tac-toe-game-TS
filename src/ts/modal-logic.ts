@@ -166,6 +166,10 @@ export class ModalLogic {
         const playerWins = "0";
         playerWinsSpan.append(playerWins);
 
+        /* Show whose turn is it */
+        const playerImgContainer = $(".playerName .img-box") as HTMLDivElement;
+        playerImgContainer.classList.add("show-turn");
+
         this.playerNameParagraph.textContent = "";
         this.playerNameParagraph.append(
           this.input.value,

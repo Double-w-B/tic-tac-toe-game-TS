@@ -51,6 +51,18 @@ export class GameLogic {
         this.playerClicks = [];
         this.compClicks = [];
     }
+    checkTurn() {
+        const playerImg = $(".playerName .img-box");
+        const computerImg = $(".computer .img-box");
+        if (this.changeTurn) {
+            playerImg.classList.add("show-turn");
+            computerImg.classList.remove("show-turn");
+        }
+        else {
+            playerImg.classList.remove("show-turn");
+            computerImg.classList.add("show-turn");
+        }
+    }
     checkSetOfNumbers(arr, side) {
         if (side === "player") {
             let success = arr.every((val) => {
@@ -206,6 +218,7 @@ export class GameLogic {
             computerWinsContainer.appendChild(computerWinsNum);
             this.endGame = false;
         }
+        this.checkTurn();
     }
     boardClicks() {
         const modal = new ModalLogic();

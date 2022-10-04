@@ -129,6 +129,9 @@ export class ModalLogic {
                 playerWinsSpan.className = "yellow-color";
                 const playerWins = "0";
                 playerWinsSpan.append(playerWins);
+                /* Show whose turn is it */
+                const playerImgContainer = $(".playerName .img-box");
+                playerImgContainer.classList.add("show-turn");
                 this.playerNameParagraph.textContent = "";
                 this.playerNameParagraph.append(this.input.value, playerLineBreak, playerOpenSqBracket, playerSideSpan, playerCloseSqBracket, playerWinsSpan);
                 /* Create Computer Name & Side */

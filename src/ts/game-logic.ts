@@ -73,6 +73,18 @@ export class GameLogic {
     this.compClicks = [];
   }
 
+  checkTurn() {
+    const playerImg = $(".playerName .img-box") as HTMLDivElement;
+    const computerImg = $(".computer .img-box") as HTMLDivElement;
+    if (this.changeTurn) {
+      playerImg.classList.add("show-turn");
+      computerImg.classList.remove("show-turn");
+    } else {
+      playerImg.classList.remove("show-turn");
+      computerImg.classList.add("show-turn");
+    }
+  }
+
   checkSetOfNumbers(arr: string[], side: string): boolean | void {
     if (side === "player") {
       let success = arr.every((val) => {
@@ -262,6 +274,8 @@ export class GameLogic {
       computerWinsContainer.appendChild(computerWinsNum);
       this.endGame = false;
     }
+
+    this.checkTurn();
   }
 
   boardClicks(): void {

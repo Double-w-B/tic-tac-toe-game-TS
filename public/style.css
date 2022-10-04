@@ -117,6 +117,7 @@
 .players .playerName .img-box.show-turn,
 .players .computer .img-box.show-turn {
   border: 2px solid #ffb703;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .players .playerName .img-box img,
 .players .computer .img-box img {
